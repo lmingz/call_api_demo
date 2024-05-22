@@ -1,0 +1,79 @@
+I have this json:
+ {
+  "activity": {
+    "activity_id": "",
+    "start_time": "",
+    "end_time": "",
+    "location": {
+      "address": "",
+      "latitude": 
+      "longitude": 
+    },
+    "participants": [
+      {
+        "name": "",
+        "qu_id": ""
+      },
+      
+    ],
+    "description": "",
+    "tags": [
+      
+    ]
+  }
+}
+help me fill it with the information you captured from the conversation blow， please return the json only without any other word, for the field tag, populate proper tags as you see fit:
+Tom(qu_id:123): Hi Tom，let's go to hicking tomorrow in the morning as a team event?
+Jerry(qu_id:456): sure! let's go to mission peak 8am!
+Tom(qu_id:123): too early for me, let do it 9am. where shall we meet?
+Jerry(qu_id:456): let's meet at 123 main street, Fremont, California, 94636.
+
+
+请帮我根据后面一段对话填充如下json数据结构
+ {
+  "activity": {
+    "activity_id": "",
+    "start_time": "",
+    "end_time": "",
+    "location": {
+      "address": "",
+      "latitude": 
+      "longitude": 
+    },
+    "participants": [
+      {
+        "name": "",
+        "qu_id": ""
+      },
+      
+    ],
+    "description": "",
+    "tags": [
+      
+    ]
+  }
+}
+小明(qu_id:789): 小红，我们明天上午一起去公园野餐怎么样？
+小红(qu_id:101): 好啊！我们去人民公园吧，早上10点怎么样？
+小明(qu_id:789): 10点太早了，11点可以吗？我们在哪里见面？
+小红(qu_id:101): 好的，11点在人民公园南门见面吧
+小明(qu_id:789): 南门搞不好堵车，咱们要不北门吧？
+小红(qu_id:101): 中！
+小丽(qu_id:666): 6啊你们俩，去公园不带我吗？
+小红(qu_id:101): 那不能，一起去吧！
+
+注意请仅仅返回json本身，不要返回其他任何字符。对于tag这一field，请根据对话内容生成合适的tag。
+
+
+
+
+$headers = @{
+    "Content-Type" = "application/json"
+}
+
+$body = @{
+    "prompt_str" = "1"
+    "conversation_content" = "2"
+} | ConvertTo-Json
+
+Invoke-WebRequest -Uri http://127.0.0.1:5000/generate_event -Method GET -Headers $headers -Body $body
