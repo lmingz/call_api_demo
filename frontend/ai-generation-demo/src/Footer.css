@@ -1,0 +1,19 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .edit-button, .publish-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .edit-button:hover, .publish-button:hover {
+    background-color: #444;
+  }
+  

@@ -77,3 +77,6 @@ $body = @{
 } | ConvertTo-Json
 
 Invoke-WebRequest -Uri http://127.0.0.1:5000/generate_event -Method GET -Headers $headers -Body $body
+
+
+http://127.0.0.1:5000/generate_event?prompt_str=请帮我根据后面一段对话填充如下json数据结构%20{%20"event":%20{%20"event_id":%20"",%20"start_time":%20"",%20"end_time":%20"",%20"location":%20{%20"address":%20"",%20"latitude":%20"longitude":%20},%20"participants":%20[%20{%20"name":%20"",%20"qu_id":%20"",%20"tasks":%20[]%20},%20],%20"description":%20"",%20"tags":%20[%20]%20}%20}%20注意请仅仅返回json本身！不要返回其他任何字符！对于tag这一field，请根据对话内容生成合适的tag,tag请使用中文。%20如果对话中决定了某个人在活动中的任务，请在“description”中列出。请确保不要在JSON中增加任何新字段。%20对话：&conversation_content=小明(qu_id:789):%20小红，我们明天上午一起去公园野餐怎么样？%20小红(qu_id:101):%20好啊！我们去人民公园吧，早上10点怎么样？%20小明(qu_id:789):%2010点太早了，11点可以吗？我们在哪里见面？%20小红(qu_id:101):%20好的，11点在人民公园南门见面吧%20小明(qu_id:789):%20南门搞不好堵车，咱们要不北门吧？%20小红(qu_id:101):%20中！%20小丽(qu_id:666):%206啊你们俩，去公园不带我吗？%20小红(qu_id:101):%20那不能，一起去吧！

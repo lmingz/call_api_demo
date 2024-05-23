@@ -1,0 +1,23 @@
+.participants {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .participants span {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .participants strong {
+    color: #000;
+    cursor: pointer;
+  }
+  

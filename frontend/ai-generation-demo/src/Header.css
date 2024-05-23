@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h1 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .options {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
