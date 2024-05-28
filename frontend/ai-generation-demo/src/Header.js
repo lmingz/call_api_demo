@@ -1,10 +1,11 @@
 import React from 'react';
-import './Header.css';
+import './css//Header.css';
 
-const Header = () => {
+const Header = (title) => {
+  // console.log("from header" + title.title);
   return (
     <div className="header">
-      <h1>今・天大西门体育场篮球</h1>
+      <h1>{title.title}</h1>
       <div className="options">•••</div>
     </div>
   );

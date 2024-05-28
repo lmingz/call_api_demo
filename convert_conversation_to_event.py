@@ -13,7 +13,7 @@ def call_llm_with_messages(message):
         {"role": "user", "content": message},
     ]
     response = Generation.call(
-        model="qwen-long",
+        model="qwen-max",
         messages=messages,
         # 设置随机数种子seed，如果没有设置，则随机数种子默认为1234
         seed = random.randint(0, 1000),

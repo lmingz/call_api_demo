@@ -4,8 +4,11 @@ from dashscope import Generation  # 建议dashscope SDK 的版本 >= 1.14.0
 import re
 import json
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 def call_llm_with_messages(message):
     messages = [
@@ -59,15 +62,13 @@ def purify_json(poluted_json):
 def transform_event_json(original, desired):
     transformed = desired.copy()
     
+    transformed['event']['event_title'] = original['event'].get('event_title', "活动标题")
     transformed['event']['event_id'] = original['event'].get('event_id', "")
     transformed['event']['start_time'] = original['event'].get('start_time', "")
     transformed['event']['end_time'] = original['event'].get('end_time', "")
     
     location = original['event'].get('location', {})
     transformed['event']['location']['address'] = location.get('address', "")
-    transformed['event']['location']['latitude'] = location.get('latitude', "")
-    transformed['event']['location']['longitude'] = location.get('longitude', "")
-    
     transformed['event']['participants'] = [
         {
             "name": p.get('name', ""),
@@ -90,13 +91,12 @@ def generate_event():
     # Desired structure
     desired_structure = {
         "event": {
+            "event_title":"",
             "event_id": "",
             "start_time": "",
             "end_time": "",
             "location": {
                 "address": "",
-                "latitude": "",
-                "longitude": ""
             },
             "participants": [
                 {

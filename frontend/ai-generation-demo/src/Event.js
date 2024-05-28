@@ -1,24 +1,27 @@
 import React from 'react';
-import Card from './Card';
+import EventCard from './EventCard';
 import Header from './Header';
 import Description from './Description';
 import Tags from './Tags';
 import Participants from './Participants';
 import Footer from './Footer';
-import './App.css';
+import './css//Event.css';
 
-const App = () => {
+
+const Event = (eventData) => {
+  console.log("from event: " + eventData)
   return (
-    <div className="app">
-      <Card>
-        <Header />
-        <Description />
-        <Tags />
-        <Participants />
+    <div className="event">
+      <h1></h1>
+      <EventCard>
+        <Header title={eventData.event.event_title}/>
+        <Description description = {eventData.event.description} />
+        <Tags tags = {eventData.event.tags}/>
+        <Participants event = {eventData.event}/>
         <Footer />
-      </Card>
+      </EventCard>
     </div>
   );
 };
 
-export default App;
+export default Event;

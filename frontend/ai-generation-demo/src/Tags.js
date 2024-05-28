@@ -1,12 +1,16 @@
 import React from 'react';
-import './Tags.css';
+import './css/Tags.css';
 
-const Tags = () => {
+const Tags = (tags) => {
+  // console.log(tags.tags)
   return (
     <div className="tags">
-      <span className="tag">天津大学</span>
-      <span className="tag">篮球</span>
-      <span className="tag">运动</span>
+      {tags.tags.map((tag, index) => (
+        <span key={index} className="tag">
+          {tag}
+        </span>
+      ))}
+
     </div>
   );
 };
