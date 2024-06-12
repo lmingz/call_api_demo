@@ -14,7 +14,7 @@ const initData = {
   }
 };
 const generateEventPrompt = `
-请帮我总结如下对话，生成活动标题，并填充如下json数据结构 
+请帮我根据如下对话讨论，生成活动标题，并填充如下json数据结构 
 {
   "event": {
     "event_title": "",
@@ -40,7 +40,7 @@ const generateEventPrompt = `
 对于event_title字段，请为本活动归纳一个标题。
 对于description字段，请为本活动生成一个详略得当的描述。
 对于tags这一field，请根据对话内容生成合适的tag,tag请使用中文。请至少生成3个tag,如果活动复杂请生成更多。
-如果对话中决定了某个人在活动中的任务，请在这个人的“tasks”中列出。
+如果对话中决定了某个人即将在活动中承担的任务，请在这个人的“tasks”中列出。
 `;
 
 const App = () => {
@@ -54,6 +54,8 @@ const App = () => {
   小红(qu_id:101): 中！
   小丽(qu_id:666): 6啊你们俩，去公园不带我吗？
   小红(qu_id:101): 那不能，一起去吧！`);
+  const [latency, setLatency] = useState(null);
+
 
   useEffect(() => {
     // This will run after eventData has been updated
@@ -62,10 +64,15 @@ const App = () => {
 
   const fetchEventData = async () => {
     console.log("button clicked");
+    const startTime = Date.now();
     const url = `http://127.0.0.1:5000/generate_event?prompt_str=${encodeURIComponent(generateEventPrompt)}&conversation_content=${encodeURIComponent(eventConversationContent)}`;
 
     try {
       const response = await fetch(url);
+      const endTime = Date.now();
+      const latency = endTime - startTime;
+      setLatency(latency);
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -79,16 +86,21 @@ const App = () => {
 
   return (
     <div className="app">
-      <textarea
-        value={eventConversationContent}
-        onChange={(e) => setEventConversationContent(e.target.value)}
-        placeholder="请输入对话内容"
-        rows="30"
-        cols="50"
-      />
+      <div>
+        <textarea
+          value={eventConversationContent}
+          onChange={(e) => setEventConversationContent(e.target.value)}
+          placeholder="请输入对话内容"
+          rows="30"
+          cols="50"
+        />
+      </div>
       <button onClick={fetchEventData}>
         generate event
       </button>
+      <div>
+        {latency !== null && <p>Request Latency: {latency} ms</p>}
+      </div>
       <div>
         <h1>{eventData.event.event_title}</h1>
         <p>Start Time: {eventData.event.start_time}</p>
