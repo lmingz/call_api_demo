@@ -9,15 +9,16 @@ import './css//Event.css';
 
 
 const Event = (eventData) => {
-  console.log("from event: " + eventData)
+  console.log("from Event: " + JSON.stringify(eventData, null, 2))
+  console.log("from Event：" + eventData.event_title)
   return (
     <div className="event">
       <h1></h1>
       <EventCard>
-        <Header title={eventData.event.event_title}/>
-        <Description description = {eventData.event.description} />
-        <Tags tags = {eventData.event.tags}/>
-        <Participants event = {eventData.event}/>
+        <Header title={eventData.event_title}/>
+        <Description description = {eventData.description} />
+        {/* <Tags tags = {eventData.tags}/> */}
+        <Participants event = {eventData}/>
         <Footer />
       </EventCard>
     </div>

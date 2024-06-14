@@ -1,5 +1,6 @@
 //import Event from './Event.js'
 import './css/App.css';
+// import Event from './Event'
 import React, { useEffect, useState } from 'react';
 
 const initData = {
@@ -14,7 +15,7 @@ const initData = {
   }
 };
 const generateEventPrompt = `
-请帮我根据如下对话讨论，生成活动标题，并填充如下json数据结构 
+请帮我根据如下对话讨论，填充如下json数据结构:
 {
   "event": {
     "event_title": "",
@@ -102,6 +103,7 @@ const App = () => {
         {latency !== null && <p>Request Latency: {latency} ms</p>}
       </div>
       <div>
+        {/* <Event eventData = {eventData.event}/> */}
         <h1>{eventData.event.event_title}</h1>
         <p>Start Time: {eventData.event.start_time}</p>
         <p>End Time: {eventData.event.end_time}</p>

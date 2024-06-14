@@ -16,7 +16,7 @@ def call_llm_with_messages(message):
         {"role": "user", "content": message},
     ]
     response = Generation.call(
-        model="qwen-72b-chat",
+        model="qwen-turbo",
         messages=messages,
         # 设置随机数种子seed，如果没有设置，则随机数种子默认为1234
         seed = random.randint(0, 1000),
@@ -43,10 +43,8 @@ def purify_json(poluted_json):
     json_match = re.search(r"\{.*\}", poluted_json, re.DOTALL)
     if json_match:
         json_str = json_match.group(0)
-        # 去掉注释
         json_str = re.sub(r"//.*", "", json_str)
         try:
-            # 尝试将字符串解析为JSON
             json_obj = json.loads(json_str)
             return json_obj
         except json.JSONDecodeError as e:
